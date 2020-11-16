@@ -13,6 +13,14 @@ class GeneralInformation extends Component {
   handleClick = (event) => {
     const isEditing = true;
     this.setState({ isEditing });
+    event.preventDefault();
+  };
+
+  handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    this.setState({ [name]: value });
   };
 
   form = (
@@ -25,6 +33,8 @@ class GeneralInformation extends Component {
             className="form-control"
             id="name"
             placeholder="Alex Erdei"
+            value={this.state.name}
+            onChange={this.handleChange}
           />
         </div>
         <div className="form-group col-md-4">
@@ -34,6 +44,8 @@ class GeneralInformation extends Component {
             className="form-control"
             id="email"
             placeholder="alex73@freemail.hu"
+            value={this.state.email}
+            onChange={this.handleChange}
           />
         </div>
         <div className="form-group col-md-4">
@@ -43,6 +55,8 @@ class GeneralInformation extends Component {
             className="form-control"
             id="phone"
             placeholder="07496034244"
+            value={this.state.phone}
+            onChange={this.handleChange}
           />
         </div>
       </div>
@@ -55,6 +69,8 @@ class GeneralInformation extends Component {
             id="personalInformation"
             cols="30"
             rows="10"
+            value={this.state.information}
+            onChange={this.handleChange}
           ></textarea>
         </div>
       </div>
