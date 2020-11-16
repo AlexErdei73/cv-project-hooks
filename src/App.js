@@ -7,9 +7,9 @@ class App extends Component {
     return (
       <div>
         <h1 className="bg-info text-center text-light p-2">CV Project</h1>
-        <div className="row ">
+        <div className="row">
           <div className="col-1"></div>
-          <div className="col-10">
+          <div className="col-10 border-secondary shadow">
             <GeneralInformation />
           </div>
         </div>
