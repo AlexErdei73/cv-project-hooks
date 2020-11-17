@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import GeneralInformation from "./components/generalInformation";
+import Education from "./components/education";
 
 class App extends Component {
-  state = {};
+  state = {
+    renderEducation: true,
+  };
+
+  handleDelete = () => {
+    const renderEducation = false;
+    this.setState({ renderEducation });
+  };
+
   render() {
     return (
       <div>
@@ -11,6 +20,9 @@ class App extends Component {
           <div className="col-1"></div>
           <div className="col-10 border-secondary shadow">
             <GeneralInformation />
+            {this.state.renderEducation && (
+              <Education onDelete={this.handleDelete} />
+            )}
           </div>
         </div>
       </div>
