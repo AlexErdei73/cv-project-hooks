@@ -1,14 +1,23 @@
 import React, { Component } from "react";
-import { Trash, PencilSquare } from "react-bootstrap-icons";
+import { PencilSquare } from "react-bootstrap-icons";
 
 class GeneralInformation extends Component {
   state = {
-    /*name: "",
-    email: "",
-    phone: "",
-    personalInformation: "asda",
+    name: "Alex Erdei",
+    email: "mralexerdei@yahoo.co.uk",
+    phone: "07496034244",
+    personalInformation: `Currently I am working on a project, 
+    which can automate the administration and the quality control procedures 
+    for a cleaning company in the hotel industry.The ideas come partially from me, 
+    the execution is my work guided by the feedback from my manager. 
+    Recently I have got the idea for a late career change to achieve my full potential
+    and use my stronger mathematics and problem solving skills.I have realized that 
+    I should go back to the field,which I had formally studied,but unfortunately 
+    I have never completed.In the current situation I have to wait to sell the project 
+    to the company,but I do not mind it,because solving problems by computers is good fun. 
+    I am looking for a company, which can lift my skills and experience to professional level
+    and in exchange can use my ideas and problem solving skills.`,
     isEditing: false,
-    value: "asda",*/
   };
 
   handleClick = (event) => {
