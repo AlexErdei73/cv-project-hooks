@@ -100,18 +100,21 @@ class GeneralInformation extends Component {
 
     const page = (
       <div className="container">
-        <h1>{this.state.name}</h1>
-        <div>{this.state.email}</div>
-        <div>{this.state.phone}</div>
-        <p>{this.state.personalInformation}</p>
+        <h1 className="text-center">{this.state.name}</h1>
+        <div className="text-center">{this.state.email}</div>
+        <div className="text-center">{this.state.phone}</div>
+        <br />
+        <div className="row border border-dark border-bottom-3">
+          <h4 className="text-left bg-dark text-light w-100">
+            Personal Information
+          </h4>
+          <p>{this.state.personalInformation}</p>
+        </div>
         <button
           className="btn btn-secondary btn-sm m-2"
           onClick={this.handleClick}
         >
           <PencilSquare />
-        </button>
-        <button className="btn btn-secondary btn-sm m-2">
-          <Trash />
         </button>
       </div>
     );
