@@ -42,69 +42,77 @@ class GeneralInformation extends Component {
 
   render() {
     const form = (
-      <form className="p-3 border border-dark shadow">
-        <div className="row">
-          <div className="form-group col-md-4">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              id="name"
-              placeholder="Alex Erdei"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              className="form-control"
-              name="email"
-              id="email"
-              placeholder="alex73@freemail.hu"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="text"
-              className="form-control"
-              name="phone"
-              id="phone"
-              placeholder="07496034244"
-              value={this.state.phone}
-              onChange={this.handleChange}
-            />
+      <div className="container">
+        <div className="row border border-dark">
+          <div className="col-md-12 m-4">
+            <form>
+              <div className="row w-100">
+                <div className="form-group col-md-4">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    id="name"
+                    placeholder="Alex Erdei"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group col-md-4">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="alex73@freemail.hu"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group col-md-4">
+                  <label htmlFor="phone">Phone Number</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="phone"
+                    id="phone"
+                    placeholder="07496034244"
+                    value={this.state.phone}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="row w-100">
+                <div className="form-group col-md-12">
+                  <label htmlFor="personalInformation">
+                    Personal Information
+                  </label>
+                  <textarea
+                    className="form-control"
+                    name="personalInformation"
+                    id="personalInformation"
+                    cols="30"
+                    rows="10"
+                    value={this.state.personalInformation}
+                    onChange={this.handleChange}
+                  ></textarea>
+                </div>
+              </div>
+              <div className="row">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm m-3"
+                  onClick={this.handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div className="row">
-          <div className="form-group col-md-12">
-            <label htmlFor="personalInformation">Personal Information</label>
-            <textarea
-              className="form-control"
-              name="personalInformation"
-              id="personalInformation"
-              cols="30"
-              rows="10"
-              value={this.state.personalInformation}
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
-        </div>
-        <div className="row">
-          <button
-            type="submit"
-            className="btn btn-primary btn-sm m-3"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+      </div>
     );
 
     const page = (
@@ -113,7 +121,7 @@ class GeneralInformation extends Component {
         <div className="text-center">{this.state.email}</div>
         <div className="text-center">{this.state.phone}</div>
         <br />
-        <div className="row border border-dark border-bottom-3">
+        <div className="row border border-dark">
           <h4 className="text-left bg-dark text-light w-100">
             Personal Information
           </h4>

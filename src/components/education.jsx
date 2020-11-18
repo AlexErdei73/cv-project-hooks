@@ -3,26 +3,12 @@ import { Trash, PencilSquare } from "react-bootstrap-icons";
 
 class Education extends Component {
   state = {
-    school: "",
-    dateFrom: new Date(0),
-    dateTo: new Date(0),
-    title: "",
-    description: "",
     isEditing: false,
   };
 
   handleClick = (event) => {
     const isEditing = true;
     this.setState({ isEditing });
-  };
-
-  handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    const newState = {};
-    newState[name] = value;
-    this.setState(newState);
   };
 
   handleSubmit = (event) => {
@@ -33,83 +19,94 @@ class Education extends Component {
 
   render() {
     const form = (
-      <form className="p-3 border border-dark shadow">
-        <div className="row">
-          <div className="form-group col-md-4">
-            <label htmlFor="school">School</label>
-            <input
-              type="text"
-              className="form-control"
-              name="school"
-              id="school"
-              placeholder=""
-              value={this.state.school}
-              onChange={this.handleChange}
-            />
+      <div className="col-md-12 m-4">
+        <form>
+          <div className="row w-100">
+            <div className="form-group col-3">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                id="title"
+                placeholder=""
+                value={this.props.education.title}
+                onChange={this.props.onChange}
+              />
+            </div>
+            <div className="form-group col-3">
+              <label htmlFor="school">School</label>
+              <input
+                type="text"
+                className="form-control"
+                name="school"
+                id="school"
+                placeholder=""
+                value={this.props.education.school}
+                onChange={this.props.onChange}
+              />
+            </div>
+            <div className="form-group col-3">
+              <label htmlFor="dateFrom">Date From</label>
+              <input
+                type="date"
+                className="form-control"
+                name="dateFrom"
+                id="dateFrom"
+                placeholder=""
+                value={this.props.education.dateFrom}
+                onChange={this.props.onChange}
+              />
+            </div>
+            <div className="form-group col-3">
+              <label htmlFor="dateTo">Date To</label>
+              <input
+                type="date"
+                className="form-control"
+                name="dateTo"
+                id="dateTo"
+                placeholder=""
+                value={this.props.education.dateTo}
+                onChange={this.props.onChange}
+              />
+            </div>
           </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="dateFrom">Date From</label>
-            <input
-              type="date"
-              className="form-control"
-              name="dateFrom"
-              id="dateFrom"
-              placeholder=""
-              value={this.state.dateFrom}
-              onChange={this.handleChange}
-            />
+          <div className="row w-100">
+            <div className="form-group col-12">
+              <label htmlFor="description">description</label>
+              <textarea
+                className="form-control"
+                name="description"
+                id="description"
+                cols="30"
+                rows="10"
+                value={this.props.education.description}
+                onChange={this.props.onChange}
+              ></textarea>
+            </div>
           </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="dateTo">Date To</label>
-            <input
-              type="date"
-              className="form-control"
-              name="dateTo"
-              id="dateTo"
-              placeholder=""
-              value={this.state.dateTo}
-              onChange={this.handleChange}
-            />
+          <div className="row">
+            <button
+              type="submit"
+              className="btn btn-primary btn-sm m-3"
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </button>
           </div>
-        </div>
-        <div className="row">
-          <div className="form-group col-md-12">
-            <label htmlFor="description">description</label>
-            <textarea
-              className="form-control"
-              name="description"
-              id="description"
-              cols="30"
-              rows="10"
-              value={this.state.description}
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
-        </div>
-        <div className="row">
-          <button
-            type="submit"
-            className="btn btn-primary btn-sm m-3"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     );
 
     const page = (
-      <div className="container">
-        <h1 className="text-center">{this.state.name}</h1>
-        <div className="text-center">{this.state.email}</div>
-        <div className="text-center">{this.state.phone}</div>
-        <br />
-        <div className="row border border-dark border-bottom-3">
-          <h4 className="text-left bg-dark text-light w-100">
-            Personal Information
-          </h4>
-          <p>{this.state.personalInformation}</p>
+      <div>
+        <h4>{this.state.title}</h4>
+        <div className="text-left">
+          <strong>
+            {`${this.props.education.school} (${this.props.education.dateFrom} - ${this.props.education.dateTo})`}
+          </strong>
         </div>
+        <p>{this.props.education.description}</p>
         <button
           className="btn btn-secondary btn-sm m-2"
           onClick={this.handleClick}
