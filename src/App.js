@@ -7,8 +7,8 @@ class App extends Component {
     education: [
       {
         school: "Obuda University John von Neumann Faculty of Informatics",
-        dateFrom: "01/09/2003",
-        dateTo: "30/06/2006",
+        dateFrom: "2003-09-01",
+        dateTo: "2006-06-30",
         title: "IT Engineer",
         description: `It was a 4 years long IT engineering course with very difficult exams.
       We learned about hardware and software as well from the basics. The software started
@@ -18,29 +18,30 @@ class App extends Component {
       We also learned about networking.`,
       },
       {
-        school: "",
-        dateFrom: "",
-        dateTo: "",
-        title: "",
-        description: "",
+        school: "Eötvös Lóránt University, Science Faculty",
+        dateFrom: "1992-09-01",
+        dateTo: "1997-06-30",
+        title: "Degree in chemistry and physics",
+        description: `I finished my studies with a very good qualification. It enables me to 
+        teach physics and chemistry. `,
       },
     ],
-    renderEducation: true,
   };
 
-  handleDelete = () => {
-    const renderEducation = false;
-    this.setState({ renderEducation });
+  handleDelete = (id) => {
+    const education = [...this.state.education];
+    education.splice(id, 1);
+    this.setState({ education });
   };
 
-  handleChange = (event) => {
+  handleChange = (id, event) => {
     const target = event.target;
     const name = target.name;
     const education = [...this.state.education];
     const value = target.value;
-    const newState = education[0];
+    const newState = { ...education[id] };
     newState[name] = value;
-    education[0] = newState;
+    education[id] = newState;
     this.setState({ education });
   };
 
@@ -57,13 +58,17 @@ class App extends Component {
                 <h4 className="text-left bg-dark text-light w-100">
                   Education
                 </h4>
-                {this.state.renderEducation && (
-                  <Education
-                    education={this.state.education[0]}
-                    onDelete={this.handleDelete}
-                    onChange={this.handleChange}
-                  />
-                )}
+                {this.state.education.map((item, index) => {
+                  return (
+                    <Education
+                      key={index}
+                      id={index}
+                      education={item}
+                      onDelete={this.handleDelete}
+                      onChange={this.handleChange}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
