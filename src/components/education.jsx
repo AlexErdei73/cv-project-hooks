@@ -99,7 +99,7 @@ class Education extends Component {
     );
 
     const page = (
-      <div>
+      <div className="col-md-12">
         <h4>{this.props.education.title}</h4>
         <div className="text-left">
           <strong>

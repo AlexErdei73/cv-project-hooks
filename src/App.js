@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Modal from "react-bootstrap/Modal";
 import GeneralInformation from "./components/generalInformation";
 import Education from "./components/education";
 
@@ -26,12 +27,18 @@ class App extends Component {
         teach physics and chemistry. `,
       },
     ],
+    isModalShown: false,
   };
 
-  handleDelete = (id) => {
+  select = 1;
+
+  handleDelete = () => {
     const education = [...this.state.education];
-    education.splice(id, 1);
-    this.setState({ education });
+    education.splice(this.select, 1);
+    this.setState({
+      education,
+      isModalShown: false,
+    });
   };
 
   handleChange = (id, event) => {
@@ -43,6 +50,27 @@ class App extends Component {
     newState[name] = value;
     education[id] = newState;
     this.setState({ education });
+  };
+
+  addEducation = () => {
+    const education = [...this.state.education];
+    education.push({
+      school: "",
+      dateFrom: "",
+      dateTo: "",
+      title: "",
+      description: "",
+    });
+    this.setState({ education });
+  };
+
+  showModal = (id) => {
+    this.select = id;
+    this.setState({ isModalShown: true });
+  };
+
+  hideModal = () => {
+    this.setState({ isModalShown: false });
   };
 
   render() {
@@ -64,13 +92,39 @@ class App extends Component {
                       key={index}
                       id={index}
                       education={item}
-                      onDelete={this.handleDelete}
+                      onDelete={(id) => {
+                        this.showModal(id);
+                      }}
                       onChange={this.handleChange}
                       isDeleteButton={this.state.education.length > 1}
                     />
                   );
                 })}
               </div>
+              <button
+                type="submit"
+                className="btn btn-secondary btn-sm m-2"
+                onClick={this.addEducation}
+              >
+                +
+              </button>
+              <Modal
+                show={this.state.isModalShown}
+                dialogClassName="primaryModal"
+              >
+                <Modal.Header className="bg-dark">
+                  <h2 className="text-warning text-center p-2">
+                    Proceeding with Delete
+                  </h2>
+                </Modal.Header>
+                <Modal.Body>
+                  Are you sure, you want to delete the section permanently?
+                </Modal.Body>
+                <Modal.Footer>
+                  <button onClick={this.hideModal}>Cancel</button>
+                  <button onClick={this.handleDelete}>Proceed</button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         </div>
