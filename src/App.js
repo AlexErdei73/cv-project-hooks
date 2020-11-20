@@ -66,6 +66,7 @@ class App extends Component {
                       education={item}
                       onDelete={this.handleDelete}
                       onChange={this.handleChange}
+                      isDeleteButton={this.state.education.length > 1}
                     />
                   );
                 })}

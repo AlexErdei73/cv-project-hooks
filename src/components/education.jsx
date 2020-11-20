@@ -113,12 +113,14 @@ class Education extends Component {
         >
           <PencilSquare />
         </button>
-        <button
-          className="btn btn-secondary btn-sm m-2"
-          onClick={() => this.props.onDelete(this.props.id)}
-        >
-          <Trash />
-        </button>
+        {this.props.isDeleteButton && (
+          <button
+            className="btn btn-secondary btn-sm m-2"
+            onClick={() => this.props.onDelete(this.props.id)}
+          >
+            <Trash />
+          </button>
+        )}
       </div>
     );
 
