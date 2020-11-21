@@ -17,6 +17,7 @@ class App extends Component {
       was Pascal that time. We also learnt some Delphi, C, C++, Java and even some assembly
       programming of micro controllers. We had an excessive subject about hardware architecture.
       We also learned about networking.`,
+        isEditing: false,
       },
       {
         school: "Eötvös Lóránt University, Science Faculty",
@@ -25,6 +26,7 @@ class App extends Component {
         title: "Degree in chemistry and physics",
         description: `I finished my studies with a very good qualification. It enables me to 
         teach physics and chemistry. `,
+        isEditing: false,
       },
     ],
     isModalShown: false,
@@ -60,6 +62,7 @@ class App extends Component {
       dateTo: "",
       title: "",
       description: "",
+      isEditing: true,
     });
     this.setState({ education });
   };
@@ -118,12 +121,31 @@ class App extends Component {
                   </h2>
                 </Modal.Header>
                 <Modal.Body>
-                  Are you sure, you want to delete the section permanently?
+                  <p>
+                    Are you sure, you want to delete the section permanently?
+                  </p>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <button
+                        className="btn btn-primary btn-sm m-2"
+                        onClick={this.hideModal}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3">
+                      <button
+                        className="btn btn-warning btn-sm m-2"
+                        onClick={this.handleDelete}
+                      >
+                        Proceed
+                      </button>
+                    </div>
+                  </div>
                 </Modal.Body>
-                <Modal.Footer>
-                  <button onClick={this.hideModal}>Cancel</button>
-                  <button onClick={this.handleDelete}>Proceed</button>
-                </Modal.Footer>
+                <Modal.Footer></Modal.Footer>
               </Modal>
             </div>
           </div>

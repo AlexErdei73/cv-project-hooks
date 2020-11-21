@@ -3,7 +3,7 @@ import { Trash, PencilSquare } from "react-bootstrap-icons";
 
 class Education extends Component {
   state = {
-    isEditing: false,
+    isEditing: this.props.education.isEditing,
   };
 
   handleClick = (event) => {
