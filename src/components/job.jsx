@@ -3,7 +3,7 @@ import { Trash, PencilSquare } from "react-bootstrap-icons";
 
 class Job extends Component {
   state = {
-    isEditing: this.props.education.isEditing,
+    isEditing: this.props.job.isEditing,
   };
 
   handleClick = (event) => {

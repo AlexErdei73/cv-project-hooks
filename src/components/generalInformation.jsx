@@ -7,16 +7,19 @@ class GeneralInformation extends Component {
     email: "mralexerdei@yahoo.co.uk",
     phone: "07496034244",
     personalInformation: `Currently I am working on a project, 
-    which can automate the administration and the quality control procedures 
-    for a cleaning company in the hotel industry.The ideas come partially from me, 
-    the execution is my work guided by the feedback from my manager. 
-    Recently I have got the idea for a late career change to achieve my full potential
-    and use my stronger mathematics and problem solving skills.I have realized that 
-    I should go back to the field,which I had formally studied,but unfortunately 
-    I have never completed.In the current situation I have to wait to sell the project 
-    to the company,but I do not mind it,because solving problems by computers is good fun. 
-    I am looking for a company, which can lift my skills and experience to professional level
-    and in exchange can use my ideas and problem solving skills.`,
+which can automate the administration and the quality control procedures 
+for a cleaning company in the hotel industry.The ideas come partially from me, 
+the execution is my work guided by the feedback from my manager. 
+Recently I have got the idea for a late career change to achieve my full potential
+and use my stronger mathematics and problem solving skills.I have realized that 
+I should go back to the field,which I had formally studied and used to work in,but
+unfortunately I have never completed my formal education fully.In the current situation
+I have to wait to sell the project to the company,but I do not mind it,because solving 
+problems by computers is good fun.I am looking for a company, which can lift my skills
+and experience to professional level and in exchange can use my ideas and problem solving 
+skills.My skills in web development are reaching from Linux, HTML, CSS, Bootstrap, 
+JavaScript ES5, ES6, TypeScript, Angular, React and my toolset is growing as I keep on
+going with my training.`,
     isEditing: false,
   };
 
