@@ -34,13 +34,13 @@ class Job extends Component {
               />
             </div>
             <div className="form-group col-3">
-              <label htmlFor="company">Companyl</label>
+              <label htmlFor="company">Company</label>
               <input
                 type="text"
                 className="form-control"
                 name="company"
                 id="company"
-                value={this.props.job.school}
+                value={this.props.job.company}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
               />
             </div>

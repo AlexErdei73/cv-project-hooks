@@ -5,7 +5,33 @@ import Education from "./components/education";
 import Job from "./components/job";
 
 class App extends Component {
+  constructor() {
+    super();
+    if (!this.load()) return;
+    this.state = this.load();
+  }
+
   state = {
+    person: {
+      name: "Alex Erdei",
+      email: "mralexerdei@yahoo.co.uk",
+      phone: "07496034244",
+      personalInformation: `Currently I am working on a project, 
+which can automate the administration and the quality control procedures 
+for a cleaning company in the hotel industry.The ideas come partially from me, 
+the execution is my work guided by the feedback from my manager. 
+Recently I have got the idea for a late career change to achieve my full potential
+and use my stronger mathematics and problem solving skills.I have realized that 
+I should go back to the field,which I had formally studied and used to work in,but
+unfortunately I have never completed my formal education fully.In the current situation
+I have to wait to sell the project to the company,but I do not mind it,because solving 
+problems by computers is good fun.I am looking for a company, which can lift my skills
+and experience to professional level and in exchange can use my ideas and problem solving 
+skills.My skills in web development are reaching from Linux, HTML, CSS, Bootstrap, 
+JavaScript ES5, ES6, TypeScript, Angular, React and my toolset is growing as I keep on
+going with my training.`,
+      isEditing: false,
+    },
     education: [
       {
         school: "Obuda University John von Neumann Faculty of Informatics",
@@ -34,7 +60,7 @@ teach physics and chemistry.`,
     ],
     job: [
       {
-        company: "freelancer",
+        company: "Freelancer",
         dateFrom: "2009-03-16",
         dateTo: "2020-11-22",
         title: "Web Developer",
@@ -45,6 +71,14 @@ up some freelance work from time to time just to keep my skills alive and tried 
 During all these years the technology has improved a lot, so I decided to actualize my knowledge with a
 free online course, which is the best available on the web.I've found The Odin Project this way, which I've
 been doing actively since January 2020 before the first COVID-19 lockdown happened.`,
+        isEditing: false,
+      },
+      {
+        company: "Citibank Zrt.",
+        dateFrom: "2006-02-01",
+        dateTo: "2009-01-31",
+        title: "Software Developer",
+        description: `My duties included maintaining the website of the bank and `,
         isEditing: false,
       },
     ],
@@ -121,6 +155,15 @@ been doing actively since January 2020 before the first COVID-19 lockdown happen
     this.setState({ job });
   };
 
+  changePerson = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    const person = { ...this.state.person };
+    person[name] = value;
+    this.setState({ person });
+  };
+
   showModal = (id, onDelete) => {
     this.select = id;
     this.onDelete = onDelete;
@@ -131,14 +174,28 @@ been doing actively since January 2020 before the first COVID-19 lockdown happen
     this.setState({ isModalShown: false });
   };
 
+  save() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
+
+  load() {
+    if (localStorage.getItem("state")) {
+      return JSON.parse(localStorage.getItem("state"));
+    }
+  }
+
   render() {
+    this.save();
     return (
       <div>
         <h1 className="bg-info text-center text-light p-2">CV Project</h1>
         <div className="row">
           <div className="col-1"></div>
           <div className="col-10 border-secondary shadow">
-            <GeneralInformation />
+            <GeneralInformation
+              person={this.state.person}
+              onChange={this.changePerson}
+            />
             <div className="container">
               <div className="row border border-dark">
                 <h4 className="text-left bg-dark text-light w-100">
