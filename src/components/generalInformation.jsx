@@ -31,21 +31,22 @@ class GeneralInformation extends Component {
                     className="form-control"
                     name="name"
                     id="name"
-                    placeholder="Alex Erdei"
                     value={this.props.person.name}
                     onChange={this.props.onChange}
+                    required
                   />
                 </div>
                 <div className="form-group col-md-4">
                   <label htmlFor="email">Email</label>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     name="email"
                     id="email"
-                    placeholder="alex73@freemail.hu"
                     value={this.props.person.email}
                     onChange={this.props.onChange}
+                    required
+                    pattern
                   />
                 </div>
                 <div className="form-group col-md-4">
@@ -55,7 +56,6 @@ class GeneralInformation extends Component {
                     className="form-control"
                     name="phone"
                     id="phone"
-                    placeholder="07496034244"
                     value={this.props.person.phone}
                     onChange={this.props.onChange}
                   />
@@ -74,6 +74,7 @@ class GeneralInformation extends Component {
                     rows="10"
                     value={this.props.person.personalInformation}
                     onChange={this.props.onChange}
+                    required
                   ></textarea>
                 </div>
               </div>
@@ -81,7 +82,7 @@ class GeneralInformation extends Component {
                 <button
                   type="submit"
                   className="btn btn-primary btn-sm m-3"
-                  onClick={this.handleSubmit}
+                  onSubmit={this.handleSubmit}
                 >
                   Submit
                 </button>

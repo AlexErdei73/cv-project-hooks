@@ -29,9 +29,9 @@ class Education extends Component {
                 className="form-control"
                 name="title"
                 id="title"
-                placeholder=""
                 value={this.props.education.title}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
             <div className="form-group col-3">
@@ -41,9 +41,9 @@ class Education extends Component {
                 className="form-control"
                 name="school"
                 id="school"
-                placeholder=""
                 value={this.props.education.school}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
             <div className="form-group col-3">
@@ -53,9 +53,9 @@ class Education extends Component {
                 className="form-control"
                 name="dateFrom"
                 id="dateFrom"
-                placeholder=""
                 value={this.props.education.dateFrom}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
             <div className="form-group col-3">
@@ -65,9 +65,9 @@ class Education extends Component {
                 className="form-control"
                 name="dateTo"
                 id="dateTo"
-                placeholder=""
                 value={this.props.education.dateTo}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
           </div>
@@ -89,7 +89,7 @@ class Education extends Component {
             <button
               type="submit"
               className="btn btn-primary btn-sm m-3"
-              onClick={this.handleSubmit}
+              onSubmit={this.handleSubmit}
             >
               Submit
             </button>

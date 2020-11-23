@@ -31,6 +31,7 @@ class Job extends Component {
                 id="title"
                 value={this.props.job.title}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
             <div className="form-group col-3">
@@ -42,6 +43,7 @@ class Job extends Component {
                 id="company"
                 value={this.props.job.company}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
             <div className="form-group col-3">
@@ -53,6 +55,7 @@ class Job extends Component {
                 id="dateFrom"
                 value={this.props.job.dateFrom}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
             <div className="form-group col-3">
@@ -64,6 +67,7 @@ class Job extends Component {
                 id="dateTo"
                 value={this.props.job.dateTo}
                 onChange={(event) => this.props.onChange(this.props.id, event)}
+                required
               />
             </div>
           </div>
@@ -85,7 +89,7 @@ class Job extends Component {
             <button
               type="submit"
               className="btn btn-primary btn-sm m-3"
-              onClick={this.handleSubmit}
+              onSubmit={this.handleSubmit}
             >
               Submit
             </button>
