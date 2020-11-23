@@ -69,7 +69,7 @@ It wasn't easy, but I've managed to do it nicely. The only problem, that I neede
 was over qualified for.I couldn't get a developer position without speaking English very well.I picked
 up some freelance work from time to time just to keep my skills alive and tried to learn new technologies.
 During all these years the technology has improved a lot, so I decided to actualize my knowledge with a
-free online course, which is the best available on the web.I've found The Odin Project this way, which I've
+free online course, which is the best available on the web.I've found The Odin Project, which I've
 been doing actively since January 2020 before the first COVID-19 lockdown happened.`,
         isEditing: false,
       },
@@ -78,7 +78,9 @@ been doing actively since January 2020 before the first COVID-19 lockdown happen
         dateFrom: "2006-02-01",
         dateTo: "2009-01-31",
         title: "Software Developer",
-        description: `My duties included maintaining the website of the bank and `,
+        description: `My duties were very specific. I contributed to the coding of certain Delphi programs,
+which mostly dealt with data analysis of risk assessment in the corporate and retail sector too. Because of
+the nature of the business security and confidentiality was the first priority.`,
         isEditing: false,
       },
     ],
