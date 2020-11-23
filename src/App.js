@@ -25,11 +25,12 @@ and use my stronger mathematics and problem solving skills.I have realized that
 I should go back to the field,which I had formally studied and used to work in,but
 unfortunately I have never completed my formal education fully.In the current situation
 I have to wait to sell the project to the company,but I do not mind it,because solving 
-problems by computers is good fun.I am looking for a company, which can lift my skills
-and experience to professional level and in exchange can use my ideas and problem solving 
-skills.My skills in web development are reaching from Linux, HTML, CSS, Bootstrap, 
-JavaScript ES5, ES6, TypeScript, Angular, React and my toolset is growing as I keep on
-going with my training.`,
+problems by computers is good fun.I realized that I should learn webdevelopment, because 
+currently most of the software developer jobs are in it.I am looking for a company, which is
+happy to use my web developer skills and in favour can provide intersting, function rich
+projects, so I can get payed for doing something, which I love.My skills in web development
+are reaching from Linux, git, gitHub, HTML, CSS,Bootstrap, JavaScript ES5, ES6, TypeScript,
+npm, webpack, Angular, React. My toolset is growing.`,
       isEditing: false,
     },
     education: [
@@ -69,7 +70,7 @@ It wasn't easy, but I've managed to do it nicely. The only problem, that I neede
 was over qualified for.I couldn't get a developer position without speaking English very well.I picked
 up some freelance work from time to time just to keep my skills alive and tried to learn new technologies.
 During all these years the technology has improved a lot, so I decided to actualize my knowledge with a
-free online course, which is the best available on the web.I've found The Odin Project this way, which I've
+free online course, which is the best available on the web.I've found The Odin Project, which I've
 been doing actively since January 2020 before the first COVID-19 lockdown happened.`,
         isEditing: false,
       },
@@ -78,7 +79,9 @@ been doing actively since January 2020 before the first COVID-19 lockdown happen
         dateFrom: "2006-02-01",
         dateTo: "2009-01-31",
         title: "Software Developer",
-        description: `My duties included maintaining the website of the bank and `,
+        description: `My duties were very specific. I contributed to the coding of certain Delphi programs,
+which mostly dealt with data analysis of risk assessment in the corporate and retail sector too. Because of
+the nature of the business security and confidentiality was the first priority.`,
         isEditing: false,
       },
     ],
