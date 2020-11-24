@@ -29,7 +29,7 @@ problems by computers is good fun.I realized that I should learn webdevelopment,
 currently most of the software developer jobs are in it.I am looking for a company, which is
 happy to use my web developer skills and in favour can provide intersting, function rich
 projects, so I can get payed for doing something, which I love.My skills in web development
-are reaching from Linux, git, gitHub, HTML, CSS,Bootstrap, JavaScript ES5, ES6, TypeScript,
+are reaching from Linux, git, gitHub, HTML, CSS, Bootstrap, JavaScript ES5, ES6, TypeScript,
 npm, webpack, Angular, React. My toolset is growing.`,
       isEditing: false,
     },
