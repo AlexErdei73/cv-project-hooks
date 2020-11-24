@@ -2,21 +2,6 @@ import React, { Component } from "react";
 import { Trash, PencilSquare } from "react-bootstrap-icons";
 
 class Job extends Component {
-  state = {
-    isEditing: this.props.job.isEditing,
-  };
-
-  handleClick = (event) => {
-    const isEditing = true;
-    this.setState({ isEditing });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const isEditing = false;
-    this.setState({ isEditing });
-  };
-
   render() {
     const form = (
       <div className="col-md-12 m-4">
@@ -89,7 +74,7 @@ class Job extends Component {
             <button
               type="submit"
               className="btn btn-primary btn-sm m-3"
-              onSubmit={this.handleSubmit}
+              onSubmit={(event) => this.props.onSubmit(event, this.props.id)}
             >
               Submit
             </button>
@@ -109,7 +94,7 @@ class Job extends Component {
         <p>{this.props.job.description}</p>
         <button
           className="btn btn-secondary btn-sm m-2"
-          onClick={this.handleClick}
+          onClick={() => this.props.onEdit(this.props.id)}
         >
           <PencilSquare />
         </button>
@@ -124,7 +109,7 @@ class Job extends Component {
       </div>
     );
 
-    return (this.state.isEditing && form) || page;
+    return (this.props.job.isEditing && form) || page;
   }
 }
 

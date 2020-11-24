@@ -158,6 +158,19 @@ the nature of the business security and confidentiality was the first priority.`
     this.setState({ job });
   };
 
+  editJob = (id) => {
+    const job = [...this.state.job];
+    job[id].isEditing = true;
+    this.setState({ job });
+  };
+
+  submitJob = (event, id) => {
+    event.preventDefault();
+    const job = [...this.state.job];
+    job[id].isEditing = false;
+    this.setState({ job });
+  };
+
   changePerson = (event) => {
     const target = event.target;
     const name = target.name;
@@ -183,7 +196,14 @@ the nature of the business security and confidentiality was the first priority.`
 
   load() {
     if (localStorage.getItem("state")) {
-      return JSON.parse(localStorage.getItem("state"));
+      const state = JSON.parse(localStorage.getItem("state"));
+      state.job.forEach((item) => {
+        item.isEditing = false;
+      });
+      state.education.forEach((item) => {
+        item.isEditing = false;
+      });
+      return state;
     }
   }
 
@@ -240,6 +260,8 @@ the nature of the business security and confidentiality was the first priority.`
                         this.showModal(id, this.deleteJob);
                       }}
                       onChange={this.changeJob}
+                      onEdit={this.editJob}
+                      onSubmit={this.submitJob}
                       isDeleteButton={this.state.job.length > 1}
                     />
                   );
