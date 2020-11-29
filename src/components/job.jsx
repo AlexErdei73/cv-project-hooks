@@ -5,7 +5,7 @@ class Job extends Component {
   render() {
     const form = (
       <div className="col-md-12 m-4">
-        <form>
+        <form onSubmit={(event) => this.props.onSubmit(event, this.props.id)}>
           <div className="row w-100">
             <div className="form-group col-3">
               <label htmlFor="title">Title</label>
@@ -70,12 +70,8 @@ class Job extends Component {
               ></textarea>
             </div>
           </div>
-          <div className="row">
-            <button
-              type="submit"
-              className="btn btn-primary btn-sm m-3"
-              onSubmit={(event) => this.props.onSubmit(event, this.props.id)}
-            >
+          <div className="row w-100">
+            <button type="submit" className="btn btn-primary btn-sm m-3">
               Submit
             </button>
           </div>

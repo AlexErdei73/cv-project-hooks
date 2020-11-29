@@ -172,6 +172,7 @@ the nature of the business security and confidentiality was the first priority.`
   };
 
   changePerson = (event) => {
+    event.preventDefault();
     const target = event.target;
     const name = target.name;
     const value = target.value;
@@ -197,12 +198,6 @@ the nature of the business security and confidentiality was the first priority.`
   load() {
     if (localStorage.getItem("state")) {
       const state = JSON.parse(localStorage.getItem("state"));
-      state.job.forEach((item) => {
-        item.isEditing = false;
-      });
-      state.education.forEach((item) => {
-        item.isEditing = false;
-      });
       return state;
     }
   }
@@ -261,7 +256,7 @@ the nature of the business security and confidentiality was the first priority.`
                       }}
                       onChange={this.changeJob}
                       onEdit={this.editJob}
-                      onSubmit={this.submitJob}
+                      onSubmit={(event, id) => this.submitJob(event, id)}
                       isDeleteButton={this.state.job.length > 1}
                     />
                   );

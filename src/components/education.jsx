@@ -20,7 +20,7 @@ class Education extends Component {
   render() {
     const form = (
       <div className="col-md-12 m-4">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="row w-100">
             <div className="form-group col-3">
               <label htmlFor="title">Title</label>
@@ -86,11 +86,7 @@ class Education extends Component {
             </div>
           </div>
           <div className="row">
-            <button
-              type="submit"
-              className="btn btn-primary btn-sm m-3"
-              onSubmit={this.handleSubmit}
-            >
+            <button type="submit" className="btn btn-primary btn-sm m-3">
               Submit
             </button>
           </div>
