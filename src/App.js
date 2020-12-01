@@ -1,17 +1,11 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import GeneralInformation from "./components/generalInformation";
 import Education from "./components/education";
 import Job from "./components/job";
 
-class App extends Component {
-  constructor() {
-    super();
-    if (!this.load()) return;
-    this.state = this.load();
-  }
-
-  state = {
+const App = () => {
+  const initialState = {
     person: {
       name: "Alex Erdei",
       email: "mralexerdei@yahoo.co.uk",
@@ -88,33 +82,41 @@ the nature of the business security and confidentiality was the first priority.`
     isModalShown: false,
   };
 
-  select = 1;
-
-  deleteEducation = () => {
-    const education = [...this.state.education];
-    education.splice(this.select, 1);
-    this.setState({
-      education,
-      isModalShown: false,
-    });
+  const load = () => {
+    if (localStorage.getItem("state")) {
+      const state = JSON.parse(localStorage.getItem("state"));
+      return state;
+    }
   };
 
-  onDelete = this.deleteEducation;
+  const [state, setState] = useState(load() || initialState);
 
-  changeEducation = (id, event) => {
+  let select = 1;
+
+  const deepCopy = (inputObj) => {
+    return JSON.parse(JSON.stringify(inputObj));
+  };
+
+  const deleteEducation = () => {
+    const newState = deepCopy(state);
+    newState.education.splice(select, 1);
+    setState(newState);
+  };
+
+  let onDelete = deleteEducation;
+
+  const changeEducation = (id, event) => {
     const target = event.target;
     const name = target.name;
-    const education = [...this.state.education];
     const value = target.value;
-    const newState = { ...education[id] };
-    newState[name] = value;
-    education[id] = newState;
-    this.setState({ education });
+    const newState = deepCopy(state);
+    newState.education[id][name] = value;
+    setState(newState);
   };
 
-  addEducation = () => {
-    const education = [...this.state.education];
-    education.push({
+  const addEducation = () => {
+    const newState = deepCopy(state);
+    newState.education.push({
       school: "",
       dateFrom: "",
       dateTo: "",
@@ -122,32 +124,28 @@ the nature of the business security and confidentiality was the first priority.`
       description: "",
       isEditing: true,
     });
-    this.setState({ education });
+    setState(newState);
   };
 
-  deleteJob = () => {
-    const job = [...this.state.job];
-    job.splice(this.select, 1);
-    this.setState({
-      job,
-      isModalShown: false,
-    });
+  const deleteJob = () => {
+    const newState = deepCopy(state);
+    newState.job.splice(select, 1);
+    newState.isModalShown = false;
+    setState(newState);
   };
 
-  changeJob = (id, event) => {
+  const changeJob = (id, event) => {
     const target = event.target;
     const name = target.name;
-    const job = [...this.state.job];
     const value = target.value;
-    const newState = { ...job[id] };
-    newState[name] = value;
-    job[id] = newState;
-    this.setState({ job });
+    const newState = deepCopy(state);
+    newState.job[id][name] = value;
+    setState(newState);
   };
 
-  addJob = () => {
-    const job = [...this.state.job];
-    job.push({
+  const addJob = () => {
+    const newState = deepCopy(state);
+    newState.job.push({
       company: "",
       dateFrom: "",
       dateTo: "",
@@ -155,162 +153,153 @@ the nature of the business security and confidentiality was the first priority.`
       description: "",
       isEditing: true,
     });
-    this.setState({ job });
+    setState(newState);
   };
 
-  editJob = (id) => {
-    const job = [...this.state.job];
-    job[id].isEditing = true;
-    this.setState({ job });
+  const editJob = (id) => {
+    const newState = deepCopy(state);
+    newState.job[id].isEditing = true;
+    setState(newState);
   };
 
-  submitJob = (event, id) => {
+  const submitJob = (event, id) => {
     event.preventDefault();
-    const job = [...this.state.job];
-    job[id].isEditing = false;
-    this.setState({ job });
+    const newState = deepCopy(state);
+    newState.job[id].isEditing = false;
+    setState(newState);
   };
 
-  changePerson = (event) => {
+  const changePerson = (event) => {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    const person = { ...this.state.person };
-    person[name] = value;
-    this.setState({ person });
+    const newState = deepCopy(state);
+    newState.person[name] = value;
+    setState(newState);
   };
 
-  showModal = (id, onDelete) => {
-    this.select = id;
-    this.onDelete = onDelete;
-    this.setState({ isModalShown: true });
+  const showModal = (id, inputOnDelete) => {
+    select = id;
+    onDelete = inputOnDelete;
+    const newState = deepCopy(state);
+    newState.isModalShown = true;
+    setState(newState);
   };
 
-  hideModal = () => {
-    this.setState({ isModalShown: false });
+  const hideModal = () => {
+    const newState = deepCopy(state);
+    newState.isModalShown = false;
+    setState(newState);
   };
 
-  save() {
-    localStorage.setItem("state", JSON.stringify(this.state));
-  }
+  const save = () => {
+    localStorage.setItem("state", JSON.stringify(state));
+  };
 
-  load() {
-    if (localStorage.getItem("state")) {
-      const state = JSON.parse(localStorage.getItem("state"));
-      return state;
-    }
-  }
+  useEffect(() => {
+    save();
+  }, [state]);
 
-  render() {
-    this.save();
-    return (
-      <div>
-        <h1 className="bg-info text-center text-light p-2">CV Project</h1>
-        <div className="row">
-          <div className="col-1"></div>
-          <div className="col-10 border-secondary shadow">
-            <GeneralInformation
-              person={this.state.person}
-              onChange={this.changePerson}
-            />
-            <div className="container">
-              <div className="row border border-dark">
-                <h4 className="text-left bg-dark text-light w-100">
-                  Education
-                </h4>
-                {this.state.education.map((item, index) => {
-                  return (
-                    <Education
-                      key={index}
-                      id={index}
-                      education={item}
-                      onDelete={(id) => {
-                        this.showModal(id, this.deleteEducation);
-                      }}
-                      onChange={this.changeEducation}
-                      isDeleteButton={this.state.education.length > 1}
-                    />
-                  );
-                })}
-              </div>
-              <button
-                type="submit"
-                className="btn btn-secondary btn-sm m-2"
-                onClick={this.addEducation}
-              >
-                +
-              </button>
-              <div className="row border border-dark">
-                <h4 className="text-left bg-dark text-light w-100">
-                  Work History
-                </h4>
-                {this.state.job.map((item, index) => {
-                  return (
-                    <Job
-                      key={index}
-                      id={index}
-                      job={item}
-                      onDelete={(id) => {
-                        this.showModal(id, this.deleteJob);
-                      }}
-                      onChange={this.changeJob}
-                      onEdit={this.editJob}
-                      onSubmit={(event, id) => this.submitJob(event, id)}
-                      isDeleteButton={this.state.job.length > 1}
-                    />
-                  );
-                })}
-              </div>
-              <button
-                type="submit"
-                className="btn btn-secondary btn-sm m-2"
-                onClick={this.addJob}
-              >
-                +
-              </button>
-              <Modal
-                show={this.state.isModalShown}
-                dialogClassName="primaryModal"
-              >
-                <Modal.Header className="bg-dark">
-                  <h2 className="text-warning text-center p-2">
-                    Proceeding with Delete
-                  </h2>
-                </Modal.Header>
-                <Modal.Body>
-                  <p>
-                    Are you sure, you want to delete the section permanently?
-                  </p>
-                  <div className="row">
-                    <div className="col-md-3">
-                      <button
-                        className="btn btn-primary btn-sm m-2"
-                        onClick={this.hideModal}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3">
-                      <button
-                        className="btn btn-warning btn-sm m-2"
-                        onClick={this.onDelete}
-                      >
-                        Proceed
-                      </button>
-                    </div>
-                  </div>
-                </Modal.Body>
-                <Modal.Footer></Modal.Footer>
-              </Modal>
+  return (
+    <div>
+      <h1 className="bg-info text-center text-light p-2">CV Project</h1>
+      <div className="row">
+        <div className="col-1"></div>
+        <div className="col-10 border-secondary shadow">
+          <GeneralInformation person={state.person} onChange={changePerson} />
+          <div className="container">
+            <div className="row border border-dark">
+              <h4 className="text-left bg-dark text-light w-100">Education</h4>
+              {state.education.map((item, index) => {
+                return (
+                  <Education
+                    key={index}
+                    id={index}
+                    education={item}
+                    onDelete={(id) => {
+                      showModal(id, deleteEducation);
+                    }}
+                    onChange={changeEducation}
+                    isDeleteButton={state.education.length > 1}
+                  />
+                );
+              })}
             </div>
+            <button
+              type="submit"
+              className="btn btn-secondary btn-sm m-2"
+              onClick={addEducation}
+            >
+              +
+            </button>
+            <div className="row border border-dark">
+              <h4 className="text-left bg-dark text-light w-100">
+                Work History
+              </h4>
+              {state.job.map((item, index) => {
+                return (
+                  <Job
+                    key={index}
+                    id={index}
+                    job={item}
+                    onDelete={(id) => {
+                      showModal(id, deleteJob);
+                    }}
+                    onChange={changeJob}
+                    onEdit={editJob}
+                    onSubmit={(event, id) => submitJob(event, id)}
+                    isDeleteButton={state.job.length > 1}
+                  />
+                );
+              })}
+            </div>
+            <button
+              type="submit"
+              className="btn btn-secondary btn-sm m-2"
+              onClick={addJob}
+            >
+              +
+            </button>
+            <Modal
+              show={this.state.isModalShown}
+              dialogClassName="primaryModal"
+            >
+              <Modal.Header className="bg-dark">
+                <h2 className="text-warning text-center p-2">
+                  Proceeding with Delete
+                </h2>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Are you sure, you want to delete the section permanently?</p>
+                <div className="row">
+                  <div className="col-md-3">
+                    <button
+                      className="btn btn-primary btn-sm m-2"
+                      onClick={hideModal}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  <div className="col-md-3"></div>
+                  <div className="col-md-3"></div>
+                  <div className="col-md-3">
+                    <button
+                      className="btn btn-warning btn-sm m-2"
+                      onClick={onDelete}
+                    >
+                      Proceed
+                    </button>
+                  </div>
+                </div>
+              </Modal.Body>
+              <Modal.Footer></Modal.Footer>
+            </Modal>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;
