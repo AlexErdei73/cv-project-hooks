@@ -1,127 +1,118 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Trash, PencilSquare } from "react-bootstrap-icons";
 
-class Education extends Component {
-  state = {
-    isEditing: this.props.education.isEditing,
+const Education = (props) => {
+  const [isEditing, setIsEditing] = useState(props.education.isEditing);
+
+  const handleClick = (event) => {
+    setIsEditing(true);
   };
 
-  handleClick = (event) => {
-    const isEditing = true;
-    this.setState({ isEditing });
-  };
-
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const isEditing = false;
-    this.setState({ isEditing });
+    setIsEditing(false);
   };
 
-  render() {
-    const form = (
-      <div className="col-md-12 m-4">
-        <form onSubmit={this.handleSubmit}>
-          <div className="row w-100">
-            <div className="form-group col-3">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                className="form-control"
-                name="title"
-                id="title"
-                value={this.props.education.title}
-                onChange={(event) => this.props.onChange(this.props.id, event)}
-                required
-              />
-            </div>
-            <div className="form-group col-3">
-              <label htmlFor="school">School</label>
-              <input
-                type="text"
-                className="form-control"
-                name="school"
-                id="school"
-                value={this.props.education.school}
-                onChange={(event) => this.props.onChange(this.props.id, event)}
-                required
-              />
-            </div>
-            <div className="form-group col-3">
-              <label htmlFor="dateFrom">Date From</label>
-              <input
-                type="date"
-                className="form-control"
-                name="dateFrom"
-                id="dateFrom"
-                value={this.props.education.dateFrom}
-                onChange={(event) => this.props.onChange(this.props.id, event)}
-                required
-              />
-            </div>
-            <div className="form-group col-3">
-              <label htmlFor="dateTo">Date To</label>
-              <input
-                type="date"
-                className="form-control"
-                name="dateTo"
-                id="dateTo"
-                value={this.props.education.dateTo}
-                onChange={(event) => this.props.onChange(this.props.id, event)}
-                required
-              />
-            </div>
+  const form = (
+    <div className="col-md-12 m-4">
+      <form onSubmit={handleSubmit}>
+        <div className="row w-100">
+          <div className="form-group col-3">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              name="title"
+              id="title"
+              value={props.education.title}
+              onChange={(event) => props.onChange(props.id, event)}
+              required
+            />
           </div>
-          <div className="row w-100">
-            <div className="form-group col-12">
-              <label htmlFor="description">description</label>
-              <textarea
-                className="form-control"
-                name="description"
-                id="description"
-                cols="30"
-                rows="10"
-                value={this.props.education.description}
-                onChange={(event) => this.props.onChange(this.props.id, event)}
-              ></textarea>
-            </div>
+          <div className="form-group col-3">
+            <label htmlFor="school">School</label>
+            <input
+              type="text"
+              className="form-control"
+              name="school"
+              id="school"
+              value={props.education.school}
+              onChange={(event) => props.onChange(props.id, event)}
+              required
+            />
           </div>
-          <div className="row">
-            <button type="submit" className="btn btn-primary btn-sm m-3">
-              Submit
-            </button>
+          <div className="form-group col-3">
+            <label htmlFor="dateFrom">Date From</label>
+            <input
+              type="date"
+              className="form-control"
+              name="dateFrom"
+              id="dateFrom"
+              value={props.education.dateFrom}
+              onChange={(event) => props.onChange(props.id, event)}
+              required
+            />
           </div>
-        </form>
-      </div>
-    );
-
-    const page = (
-      <div className="col-md-12">
-        <h4>{this.props.education.title}</h4>
-        <div className="text-left">
-          <strong>
-            {`${this.props.education.school} (${this.props.education.dateFrom} - ${this.props.education.dateTo})`}
-          </strong>
+          <div className="form-group col-3">
+            <label htmlFor="dateTo">Date To</label>
+            <input
+              type="date"
+              className="form-control"
+              name="dateTo"
+              id="dateTo"
+              value={props.education.dateTo}
+              onChange={(event) => props.onChange(props.id, event)}
+              required
+            />
+          </div>
         </div>
-        <p>{this.props.education.description}</p>
+        <div className="row w-100">
+          <div className="form-group col-12">
+            <label htmlFor="description">description</label>
+            <textarea
+              className="form-control"
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+              value={props.education.description}
+              onChange={(event) => props.onChange(props.id, event)}
+            ></textarea>
+          </div>
+        </div>
+        <div className="row">
+          <button type="submit" className="btn btn-primary btn-sm m-3">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+
+  const page = (
+    <div className="col-md-12">
+      <h4>{props.education.title}</h4>
+      <div className="text-left">
+        <strong>
+          {`${props.education.school} (${props.education.dateFrom} - ${props.education.dateTo})`}
+        </strong>
+      </div>
+      <p>{props.education.description}</p>
+      <button className="btn btn-secondary btn-sm m-2" onClick={handleClick}>
+        <PencilSquare />
+      </button>
+      {props.isDeleteButton && (
         <button
           className="btn btn-secondary btn-sm m-2"
-          onClick={this.handleClick}
+          onClick={() => props.onDelete(props.id)}
         >
-          <PencilSquare />
+          <Trash />
         </button>
-        {this.props.isDeleteButton && (
-          <button
-            className="btn btn-secondary btn-sm m-2"
-            onClick={() => this.props.onDelete(this.props.id)}
-          >
-            <Trash />
-          </button>
-        )}
-      </div>
-    );
+      )}
+    </div>
+  );
 
-    return (this.state.isEditing && form) || page;
-  }
-}
+  return (isEditing && form) || page;
+};
 
 export default Education;
