@@ -5,6 +5,21 @@ import Education from "./components/education";
 import Job from "./components/job";
 
 const App = () => {
+  const deleteEducation = () => {
+    const newState = deepCopy(state);
+    console.log(state.select);
+    newState.education.splice(state.select, 1);
+    newState.isModalShown = false;
+    setState(newState);
+  };
+
+  const deleteJob = () => {
+    const newState = deepCopy(state);
+    newState.job.splice(state.select, 1);
+    newState.isModalShown = false;
+    setState(newState);
+  };
+
   const initialState = {
     person: {
       name: "Alex Erdei",
@@ -80,6 +95,8 @@ the nature of the business security and confidentiality was the first priority.`
       },
     ],
     isModalShown: false,
+    select: 1,
+    onDelete: deleteEducation,
   };
 
   const load = () => {
@@ -91,19 +108,11 @@ the nature of the business security and confidentiality was the first priority.`
 
   const [state, setState] = useState(load() || initialState);
 
-  let select = 1;
-
   const deepCopy = (inputObj) => {
     return JSON.parse(JSON.stringify(inputObj));
   };
 
-  const deleteEducation = () => {
-    const newState = deepCopy(state);
-    newState.education.splice(select, 1);
-    setState(newState);
-  };
-
-  let onDelete = deleteEducation;
+  const onDelete = state.onDelete;
 
   const changeEducation = (id, event) => {
     const target = event.target;
@@ -124,13 +133,6 @@ the nature of the business security and confidentiality was the first priority.`
       description: "",
       isEditing: true,
     });
-    setState(newState);
-  };
-
-  const deleteJob = () => {
-    const newState = deepCopy(state);
-    newState.job.splice(select, 1);
-    newState.isModalShown = false;
     setState(newState);
   };
 
@@ -180,9 +182,10 @@ the nature of the business security and confidentiality was the first priority.`
   };
 
   const showModal = (id, inputOnDelete) => {
-    select = id;
-    onDelete = inputOnDelete;
     const newState = deepCopy(state);
+    newState.select = id;
+    newState.onDelete = inputOnDelete;
+    console.log(newState.select);
     newState.isModalShown = true;
     setState(newState);
   };
