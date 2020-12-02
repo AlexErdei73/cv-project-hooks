@@ -7,7 +7,6 @@ import Job from "./components/job";
 const App = () => {
   const deleteEducation = () => {
     const newState = deepCopy(state);
-    console.log(state.select);
     newState.education.splice(state.select, 1);
     newState.isModalShown = false;
     setState(newState);
@@ -112,8 +111,6 @@ the nature of the business security and confidentiality was the first priority.`
     return JSON.parse(JSON.stringify(inputObj));
   };
 
-  const onDelete = state.onDelete;
-
   const changeEducation = (id, event) => {
     const target = event.target;
     const name = target.name;
@@ -185,9 +182,9 @@ the nature of the business security and confidentiality was the first priority.`
     const newState = deepCopy(state);
     newState.select = id;
     newState.onDelete = inputOnDelete;
-    console.log(newState.select);
     newState.isModalShown = true;
     setState(newState);
+    save();
   };
 
   const hideModal = () => {
@@ -286,7 +283,7 @@ the nature of the business security and confidentiality was the first priority.`
                   <div className="col-md-3">
                     <button
                       className="btn btn-warning btn-sm m-2"
-                      onClick={onDelete}
+                      onClick={state.onDelete}
                     >
                       Proceed
                     </button>

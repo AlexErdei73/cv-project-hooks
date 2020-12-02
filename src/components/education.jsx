@@ -104,10 +104,7 @@ const Education = (props) => {
       {props.isDeleteButton && (
         <button
           className="btn btn-secondary btn-sm m-2"
-          onClick={() => {
-            console.log(props.id);
-            props.onDelete(props.id);
-          }}
+          onClick={() => props.onDelete(props.id)}
         >
           <Trash />
         </button>
