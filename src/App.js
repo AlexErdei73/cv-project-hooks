@@ -261,10 +261,7 @@ the nature of the business security and confidentiality was the first priority.`
             >
               +
             </button>
-            <Modal
-              show={this.state.isModalShown}
-              dialogClassName="primaryModal"
-            >
+            <Modal show={state.isModalShown} dialogClassName="primaryModal">
               <Modal.Header className="bg-dark">
                 <h2 className="text-warning text-center p-2">
                   Proceeding with Delete
