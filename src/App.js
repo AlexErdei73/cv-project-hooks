@@ -5,17 +5,25 @@ import Education from "./components/education";
 import Job from "./components/job";
 
 const App = () => {
-  const deleteEducation = () => {
+  const deepCopy = (inputObj) => {
+    return JSON.parse(JSON.stringify(inputObj));
+  };
+
+  const deleteEducation = (id) => {
     const newState = deepCopy(state);
-    newState.education.splice(state.select, 1);
+    console.log("delete edu", id);
+    newState.education.splice(id, 1);
     newState.isModalShown = false;
+    newState.select = id;
     setState(newState);
   };
 
   const deleteJob = () => {
+    console.log(state.onDelete);
+    console.log(state.select);
     const newState = deepCopy(state);
     newState.job.splice(state.select, 1);
-    newState.isModalShown = false;
+    //newState.isModalShown = false;
     setState(newState);
   };
 
@@ -93,23 +101,22 @@ the nature of the business security and confidentiality was the first priority.`
         isEditing: false,
       },
     ],
-    isModalShown: false,
-    select: 1,
+    select: -5,
     onDelete: deleteEducation,
+    isModalShown: false,
   };
 
   const load = () => {
     if (localStorage.getItem("state")) {
+      console.log("load");
       const state = JSON.parse(localStorage.getItem("state"));
       return state;
     }
   };
 
-  const [state, setState] = useState(load() || initialState);
-
-  const deepCopy = (inputObj) => {
-    return JSON.parse(JSON.stringify(inputObj));
-  };
+  console.log("it starts the App function again!");
+  const [state, setState] = useState(initialState);
+  console.log("id:", state.select);
 
   const changeEducation = (id, event) => {
     const target = event.target;
@@ -181,10 +188,12 @@ the nature of the business security and confidentiality was the first priority.`
   const showModal = (id, inputOnDelete) => {
     const newState = deepCopy(state);
     newState.select = id;
+    console.log("showModal", newState.select);
     newState.onDelete = inputOnDelete;
     newState.isModalShown = true;
     setState(newState);
-    save();
+    console.log("it gets here after updating the state!");
+    console.log("the state.select after this:", state.select);
   };
 
   const hideModal = () => {
@@ -193,12 +202,14 @@ the nature of the business security and confidentiality was the first priority.`
     setState(newState);
   };
 
-  const save = () => {
-    localStorage.setItem("state", JSON.stringify(state));
+  const save = (newState) => {
+    console.log("save, id:", newState.select);
+    localStorage.setItem("state", JSON.stringify(newState));
   };
 
   useEffect(() => {
-    save();
+    save(state);
+    console.log("id:", state.select);
   }, [state]);
 
   return (
@@ -283,7 +294,7 @@ the nature of the business security and confidentiality was the first priority.`
                   <div className="col-md-3">
                     <button
                       className="btn btn-warning btn-sm m-2"
-                      onClick={state.onDelete}
+                      onClick={() => state.onDelete(state.select)}
                     >
                       Proceed
                     </button>
