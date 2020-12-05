@@ -1,21 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Trash, PencilSquare } from "react-bootstrap-icons";
 
 const Education = (props) => {
-  const [isEditing, setIsEditing] = useState(props.education.isEditing);
-
-  const handleClick = (event) => {
-    setIsEditing(true);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsEditing(false);
-  };
-
   const form = (
     <div className="col-md-12 m-4">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(event) => props.onSubmit(event, props.id, "education")}>
         <div className="row w-100">
           <div className="form-group col-3">
             <label htmlFor="title">Title</label>
@@ -25,7 +14,7 @@ const Education = (props) => {
               name="title"
               id="title"
               value={props.education.title}
-              onChange={(event) => props.onChange(props.id, event)}
+              onChange={(event) => props.onChange(props.id, "education", event)}
               required
             />
           </div>
@@ -37,7 +26,7 @@ const Education = (props) => {
               name="school"
               id="school"
               value={props.education.school}
-              onChange={(event) => props.onChange(props.id, event)}
+              onChange={(event) => props.onChange(props.id, "education", event)}
               required
             />
           </div>
@@ -49,7 +38,7 @@ const Education = (props) => {
               name="dateFrom"
               id="dateFrom"
               value={props.education.dateFrom}
-              onChange={(event) => props.onChange(props.id, event)}
+              onChange={(event) => props.onChange(props.id, "education", event)}
               required
             />
           </div>
@@ -61,7 +50,7 @@ const Education = (props) => {
               name="dateTo"
               id="dateTo"
               value={props.education.dateTo}
-              onChange={(event) => props.onChange(props.id, event)}
+              onChange={(event) => props.onChange(props.id, "education", event)}
               required
             />
           </div>
@@ -76,7 +65,7 @@ const Education = (props) => {
               cols="30"
               rows="10"
               value={props.education.description}
-              onChange={(event) => props.onChange(props.id, event)}
+              onChange={(event) => props.onChange(props.id, "education", event)}
             ></textarea>
           </div>
         </div>
@@ -98,15 +87,17 @@ const Education = (props) => {
         </strong>
       </div>
       <p>{props.education.description}</p>
-      <button className="btn btn-secondary btn-sm m-2" onClick={handleClick}>
+      <button
+        className="btn btn-secondary btn-sm m-2"
+        onClick={() => props.onEdit(props.id, "education")}
+      >
         <PencilSquare />
       </button>
       {props.isDeleteButton && (
         <button
           className="btn btn-secondary btn-sm m-2"
           onClick={() => {
-            console.log("edu id", props.id);
-            props.onDelete(props.id);
+            props.onDelete(props.id, "education");
           }}
         >
           <Trash />
@@ -115,7 +106,7 @@ const Education = (props) => {
     </div>
   );
 
-  return (isEditing && form) || page;
+  return (props.education.isEditing && form) || page;
 };
 
 export default Education;

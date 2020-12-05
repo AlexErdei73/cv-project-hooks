@@ -5,28 +5,6 @@ import Education from "./components/education";
 import Job from "./components/job";
 
 const App = () => {
-  const deepCopy = (inputObj) => {
-    return JSON.parse(JSON.stringify(inputObj));
-  };
-
-  const deleteEducation = (id) => {
-    const newState = deepCopy(state);
-    console.log("delete edu", id);
-    newState.education.splice(id, 1);
-    newState.isModalShown = false;
-    newState.select = id;
-    setState(newState);
-  };
-
-  const deleteJob = () => {
-    console.log(state.onDelete);
-    console.log(state.select);
-    const newState = deepCopy(state);
-    newState.job.splice(state.select, 1);
-    //newState.isModalShown = false;
-    setState(newState);
-  };
-
   const initialState = {
     person: {
       name: "Alex Erdei",
@@ -102,8 +80,26 @@ the nature of the business security and confidentiality was the first priority.`
       },
     ],
     select: -5,
-    onDelete: deleteEducation,
+    sectionType: "education",
     isModalShown: false,
+  };
+
+  const emptyEducation = {
+    school: "",
+    dateFrom: "",
+    dateTo: "",
+    title: "",
+    description: "",
+    isEditing: true,
+  };
+
+  const emptyJob = {
+    company: "",
+    dateFrom: "",
+    dateTo: "",
+    title: "",
+    description: "",
+    isEditing: true,
   };
 
   const load = () => {
@@ -114,64 +110,44 @@ the nature of the business security and confidentiality was the first priority.`
     }
   };
 
-  console.log("it starts the App function again!");
-  const [state, setState] = useState(initialState);
-  console.log("id:", state.select);
+  const [state, setState] = useState(load() || initialState);
 
-  const changeEducation = (id, event) => {
+  const deepCopy = (inputObj) => {
+    return JSON.parse(JSON.stringify(inputObj));
+  };
+
+  const deleteSectionItem = () => {
+    const newState = deepCopy(state);
+    newState[newState.sectionType].splice(newState.select, 1);
+    newState.isModalShown = false;
+    setState(newState);
+  };
+
+  const changeSectionItem = (id, sectionType, event) => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
     const newState = deepCopy(state);
-    newState.education[id][name] = value;
+    newState[sectionType][id][name] = value;
     setState(newState);
   };
 
-  const addEducation = () => {
+  const addSectionItem = (item, sectionType) => {
     const newState = deepCopy(state);
-    newState.education.push({
-      school: "",
-      dateFrom: "",
-      dateTo: "",
-      title: "",
-      description: "",
-      isEditing: true,
-    });
+    newState[sectionType].push(item);
     setState(newState);
   };
 
-  const changeJob = (id, event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+  const editSectionItem = (id, sectionType) => {
     const newState = deepCopy(state);
-    newState.job[id][name] = value;
+    newState[sectionType][id].isEditing = true;
     setState(newState);
   };
 
-  const addJob = () => {
-    const newState = deepCopy(state);
-    newState.job.push({
-      company: "",
-      dateFrom: "",
-      dateTo: "",
-      title: "",
-      description: "",
-      isEditing: true,
-    });
-    setState(newState);
-  };
-
-  const editJob = (id) => {
-    const newState = deepCopy(state);
-    newState.job[id].isEditing = true;
-    setState(newState);
-  };
-
-  const submitJob = (event, id) => {
+  const submitSectionItem = (event, id, sectionType) => {
     event.preventDefault();
     const newState = deepCopy(state);
-    newState.job[id].isEditing = false;
+    newState[sectionType][id].isEditing = false;
     setState(newState);
   };
 
@@ -185,15 +161,12 @@ the nature of the business security and confidentiality was the first priority.`
     setState(newState);
   };
 
-  const showModal = (id, inputOnDelete) => {
+  const showModal = (id, sectionType) => {
     const newState = deepCopy(state);
     newState.select = id;
-    console.log("showModal", newState.select);
-    newState.onDelete = inputOnDelete;
+    newState.sectionType = sectionType;
     newState.isModalShown = true;
     setState(newState);
-    console.log("it gets here after updating the state!");
-    console.log("the state.select after this:", state.select);
   };
 
   const hideModal = () => {
@@ -203,13 +176,11 @@ the nature of the business security and confidentiality was the first priority.`
   };
 
   const save = (newState) => {
-    console.log("save, id:", newState.select);
     localStorage.setItem("state", JSON.stringify(newState));
   };
 
   useEffect(() => {
     save(state);
-    console.log("id:", state.select);
   }, [state]);
 
   return (
@@ -228,10 +199,14 @@ the nature of the business security and confidentiality was the first priority.`
                     key={index}
                     id={index}
                     education={item}
-                    onDelete={(id) => {
-                      showModal(id, deleteEducation);
+                    onDelete={(id, sectionType) => {
+                      showModal(id, sectionType);
                     }}
-                    onChange={changeEducation}
+                    onChange={changeSectionItem}
+                    onEdit={editSectionItem}
+                    onSubmit={(event, id, sectionType) =>
+                      submitSectionItem(event, id, sectionType)
+                    }
                     isDeleteButton={state.education.length > 1}
                   />
                 );
@@ -240,7 +215,7 @@ the nature of the business security and confidentiality was the first priority.`
             <button
               type="submit"
               className="btn btn-secondary btn-sm m-2"
-              onClick={addEducation}
+              onClick={() => addSectionItem(emptyEducation, "education")}
             >
               +
             </button>
@@ -254,12 +229,14 @@ the nature of the business security and confidentiality was the first priority.`
                     key={index}
                     id={index}
                     job={item}
-                    onDelete={(id) => {
-                      showModal(id, deleteJob);
+                    onDelete={(id, sectionType) => {
+                      showModal(id, sectionType);
                     }}
-                    onChange={changeJob}
-                    onEdit={editJob}
-                    onSubmit={(event, id) => submitJob(event, id)}
+                    onChange={changeSectionItem}
+                    onEdit={editSectionItem}
+                    onSubmit={(event, id, sectionType) =>
+                      submitSectionItem(event, id, sectionType)
+                    }
                     isDeleteButton={state.job.length > 1}
                   />
                 );
@@ -268,7 +245,7 @@ the nature of the business security and confidentiality was the first priority.`
             <button
               type="submit"
               className="btn btn-secondary btn-sm m-2"
-              onClick={addJob}
+              onClick={() => addSectionItem(emptyJob, "job")}
             >
               +
             </button>
@@ -294,7 +271,7 @@ the nature of the business security and confidentiality was the first priority.`
                   <div className="col-md-3">
                     <button
                       className="btn btn-warning btn-sm m-2"
-                      onClick={() => state.onDelete(state.select)}
+                      onClick={() => deleteSectionItem(state.select)}
                     >
                       Proceed
                     </button>
