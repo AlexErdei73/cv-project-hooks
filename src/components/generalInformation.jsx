@@ -58,6 +58,19 @@ const GeneralInformation = (props) => {
             </div>
             <div className="row w-100">
               <div className="form-group col-md-12">
+                <label htmlFor="webpage">Webpage</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="webpage"
+                  id="webpage"
+                  value={props.person.webpage}
+                  onChange={props.onChange}
+                />
+              </div>
+            </div>
+            <div className="row w-100">
+              <div className="form-group col-md-12">
                 <label htmlFor="personalInformation">
                   Personal Information
                 </label>
@@ -89,6 +102,9 @@ const GeneralInformation = (props) => {
       <h1 className="text-center">{props.person.name}</h1>
       <div className="text-center">{props.person.email}</div>
       <div className="text-center">{props.person.phone}</div>
+      <a className="d-block text-center link" href={props.person.webpage}>
+        webpage
+      </a>
       <br />
       <div className="row border border-dark">
         <h4 className="text-left bg-dark text-light w-100">
