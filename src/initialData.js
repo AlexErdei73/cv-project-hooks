@@ -3,21 +3,36 @@ export const initialState = {
       name: "Alex Erdei",
       email: "mralexerdei@yahoo.co.uk",
       phone: "07496034244",
-      personalInformation: `Currently I am working on a project, 
-which can automate the administration and the quality control procedures 
-for a cleaning company in the hotel industry.The ideas come partially from me, 
-the execution is my work guided by the feedback from my manager. 
-Recently I have got the idea for a late career change to achieve my full potential
-and use my stronger mathematics and problem solving skills.I have realized that 
-I should go back to the field,which I had formally studied and used to work in,but
-unfortunately I have never completed my formal education fully.In the current situation
-I have to wait to sell the project to the company,but I do not mind it,because solving 
-problems by computers is good fun.I realized that I should learn webdevelopment, because 
-currently most of the software developer jobs are in it.I am looking for a company, which is
-happy to use my web developer skills and in favour can provide intersting, function rich
-projects, so I can get payed for doing something, which I love.My skills in web development
-are reaching from Linux, git, gitHub, HTML, CSS, Bootstrap, JavaScript ES5, ES6, TypeScript,
-npm, webpack, Angular, React. My toolset is growing.`,
+      personalInformation: `I think I am not alone with that I have started to learn new skills
+       and improve my existing ones to change career. As a teacher I have excellent learning 
+       abilities on my field and I have always been passionate about computers and programming
+        generally, since I learned the Basic language at the age of 10 on ZX-81 computers. 
+        Even during my secondary school years, I was building programs, which solved equations 
+        of physical problems numerically. This is actually common practice in physics and 
+        engineering, because most of the practical problems are difficult to solve or unsolvable 
+        by analytical tools. During these years in England I also developed a software, which my 
+        wife is still using in her current position, even if I have never worked in the UK as a 
+        professional software developer. The idea came straightforwardly to learn web development 
+        when we went to lockdown. I am still learning this, but my studies got to the point that 
+        I think my knowledge is very useful for a company, which build web apps, especially if 
+        they need front-end developer in a React based tech stack. Currently I am learning AWS 
+        to get to the level with that BaaS technology to be able to use that instead of Google 
+        Firebase in my Facebook clone. I am also planning to learn React Native, which would allow 
+        me to develop a mobile app for the messenger part of my project. Why not to do it in a 
+        professional environment?  For some of my portfolio project, please check my portfolio 
+        page.
+      Technical skills: 
+                  ▪ HTML, CSS
+                  ▪ JavaScript
+                  ▪ npm, webpack
+                  ▪ React
+                  ▪ Automated unit testing by Jest
+                  ▪ Firebase, Reactfire
+                  ▪ Object Pascal, Delphi (open source Lazarus)
+                  ▪ Python Numpy and Matplotlib (to solve physics problems with open source alternatives instead of Mathematica) 
+                  ▪ Tkinter
+                  ▪ Linux 
+                  ▪ Git, GitHub `,
       isEditing: false,
     },
     education: [
@@ -51,14 +66,19 @@ teach physics and chemistry.`,
         company: "Freelancer",
         dateFrom: "2009-03-16",
         dateTo: "2020-11-22",
-        title: "Web Developer",
+        title: "Web Developer, Private Maths Tutor",
         description: `After I arrived to the UK, the focus was on learning English and settling down.
 It wasn't easy, but I've managed to do it nicely. The only problem, that I needed to do jobs, which I
-was over qualified for.I couldn't get a developer position without speaking English very well.I picked
+was over qualified for.I couldn't get a developer postion without speaking English very well.I picked
 up some freelance work from time to time just to keep my skills alive and tried to learn new technologies.
 During all these years the technology has improved a lot, so I decided to actualize my knowledge with a
 free online course, which is the best available on the web.I've found The Odin Project, which I've
-been doing actively since January 2020 before the first COVID-19 lockdown happened.`,
+been doing actively since January 2020 before the first COVID-19 lockdown happened. I also did private
+tutoring in math for Hungarian children until the lockdown happened. Currently I am working for a
+company called Clipper Plc. My duties have nothing to do with the skills, which I have gained and 
+been gaining, therefore it is time for a career change here in the UK. My learning potential is 
+great, and I am convinced that someone, who could copy Facebook on his own and used to do software 
+development professionally in the past for three years, should do the same here too.`,
         isEditing: false,
       },
       {
@@ -68,7 +88,7 @@ been doing actively since January 2020 before the first COVID-19 lockdown happen
         title: "Software Developer",
         description: `My duties were very specific. I contributed to the coding of certain Delphi programs,
 which mostly dealt with data analysis of risk assessment in the corporate and retail sector too. Because of
-the nature of the business security and confidentiality was the first priority.`,
+the nature of the business security and confidentiality was the first priority beside my coding abilities.`,
         isEditing: false,
       },
     ],
